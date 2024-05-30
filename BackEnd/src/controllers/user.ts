@@ -4,7 +4,7 @@ import { validationResult } from "express-validator";
 
 import { UserType } from "../models/user";
 import prisma from "../lib/prisma";
-
+import bcrypt from "bcryptjs"
 
 
 
@@ -33,23 +33,23 @@ export const register = async (req: Request, res: Response) => {
                 firstName,
                 lastName,
                 email,
-                password
+                password:bcrypt.hashSync(password, 8)
               },
             
         });
 
         // Generate JWT token
-        // const token = jwt.sign({ userId: newUser.id }, process.env.JWT_SECRET as string, {
-        //     expiresIn: "1d"
-        // });
+        const token = jwt.sign({ userId: newUser.id }, process.env.JWT_SECRET as string, {
+            expiresIn: "1d"
+        });
 
-        // // Set JWT token as a cookie
-        // res.cookie("auth_token", token, {
-        //     httpOnly: true,
-        //     secure: process.env.NODE_ENV === "production",
-        //     maxAge: 86400000
-        // });
-        res.json(newUser)
+        // Set JWT token as a cookie
+        res.cookie("auth_token", token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            maxAge: 86400000
+        });
+        // res.json(newUser)
         return res.status(200).send({ message: "User registered successfully" });
     } catch (error) {
         console.error(error);
