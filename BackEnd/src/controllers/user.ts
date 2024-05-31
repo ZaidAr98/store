@@ -11,7 +11,7 @@ import bcrypt from "bcryptjs"
 
 export const register = async (req: Request, res: Response) => {
     // Apply validation middleware
-    const { firstName,lastName, email,password } = req.body;
+    const { firstName,lastName,phoneNumber,email,password} = req.body;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(400).json({ message: errors.array() });
@@ -32,6 +32,7 @@ export const register = async (req: Request, res: Response) => {
             data:<UserType> {
                 firstName,
                 lastName,
+                phoneNumber,
                 email,
                 password:bcrypt.hashSync(password, 8)
               },
@@ -50,9 +51,19 @@ export const register = async (req: Request, res: Response) => {
             maxAge: 86400000
         });
         // res.json(newUser)
-        return res.status(200).send({ message: "User registered successfully" });
+        return res.status(201).send({ message: "User registered successfully" });
     } catch (error) {
         console.error(error);
         return res.status(500).send({ message: "Something went wrong" });
+    }
+}
+
+
+
+export const updateUser = async(req:Request,res:Response)=>{
+    try {
+        
+    } catch (error) {
+        
     }
 }
