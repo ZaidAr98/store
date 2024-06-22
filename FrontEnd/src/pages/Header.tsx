@@ -1,8 +1,8 @@
-import React from 'react'
+
 
 const Header = () => {
   return (
-    <div>Header</div>
+    <div className="text-red-300">Header</div>
   )
 }
 
