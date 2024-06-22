@@ -15,7 +15,7 @@ export const Login = async (req: Request, res: Response) => {
   try {
     const user = await prisma.user.findFirst({ where: { email }});
     if(!user){
-        return res.status(400).json({message:"the email already"})
+        return res.status(400).json({message:"the email hasn't been found"})
 
     }
     const isMatch = await bcrypt.compare(password,user.password)

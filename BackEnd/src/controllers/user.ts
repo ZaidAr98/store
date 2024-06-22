@@ -11,7 +11,7 @@ import bcrypt from "bcryptjs"
 
 export const register = async (req: Request, res: Response) => {
     // Apply validation middleware
-    const { firstName,lastName,phoneNumber,email,password} = req.body;
+    const { firstName,lastName,email,password} = req.body;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(400).json({ message: errors.array() });
@@ -32,7 +32,6 @@ export const register = async (req: Request, res: Response) => {
             data:<UserType> {
                 firstName,
                 lastName,
-                phoneNumber,
                 email,
                 password:bcrypt.hashSync(password, 8)
               },

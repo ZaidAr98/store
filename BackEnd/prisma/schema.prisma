@@ -12,7 +12,6 @@ model user {
   id        String  @id @default(uuid())
   firstName String?
   lastName  String?
-  phoneNumber String @unique
   email     String  @unique
   password  String  @db.VarChar(255)
 
