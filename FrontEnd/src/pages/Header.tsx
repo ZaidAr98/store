@@ -1,8 +1,12 @@
 
-
+import FirstNavbar from "../lib/component/FirstNavbar"
+import SecondNavbar from "../lib/component/SecondNavbar"
 const Header = () => {
   return (
-    <div className="text-red-300">Header</div>
+    <>
+    <FirstNavbar/>
+    <SecondNavbar/>
+    </>
   )
 }
 
