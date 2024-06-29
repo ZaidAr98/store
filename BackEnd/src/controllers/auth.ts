@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import { validationResult } from "express-validator";
 import prisma from "../lib/prisma";
 import bcrypt from "bcryptjs"
+import logger from "../utils/logger";
 
 export const Login = async (req: Request, res: Response) => {
   const errors = validationResult(req);
@@ -12,19 +13,22 @@ export const Login = async (req: Request, res: Response) => {
   }
 
   const { email, password } = req.body;
+  logger.info("User attempting to sign in");
   try {
     const user = await prisma.user.findFirst({ where: { email }});
     if(!user){
+        logger.error("User not found");
         return res.status(400).json({message:"the email hasn't been found"})
 
     }
     const isMatch = await bcrypt.compare(password,user.password)
     if(!isMatch){
+             logger.error("Invalid credentials");
             return res.status(400).json({ message: "Invalid credentials" });
     }  
     const token = jwt.sign(
       { userId: user.id },
-        process.env.JWT_SECRET_KEY as string,
+        process.env.JWT_SECRET as string,
       {
         expiresIn: "1d",
       }
@@ -35,8 +39,9 @@ export const Login = async (req: Request, res: Response) => {
         maxAge : 86400000
     });
     res.status(200).json({message:"login successfully"})
-} catch (error) {
-    console.log(error);
+} catch (err:any) {
+   
+  logger.error(`Error occurred while signing in user: ${err.message}`);
     res.status(500).json({ message: "Something went wrong" });
   }
 };
