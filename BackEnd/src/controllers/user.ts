@@ -14,7 +14,7 @@ export const register = async (req: Request, res: Response) => {
     const { name,email,password} = req.body;
     let emailDomain = email.split("@")[0];
     
-    const role: Role = emailDomain === "zaid.hamid411" ? Role.Admin : Role.General;
+    const role: Role = emailDomain === process.env.ADMIN_EMAIL ? Role.Admin : Role.General;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(400).json({ message: errors.array() });
@@ -36,6 +36,7 @@ export const register = async (req: Request, res: Response) => {
                 name,
                 email,
                 password:bcrypt.hashSync(password, 8),
+                role
               },
             
         });
