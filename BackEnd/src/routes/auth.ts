@@ -2,7 +2,7 @@ import express from "express";
 import { Login, logout} from "../controllers/auth";
 import { check } from "express-validator";
 import { validateUser } from "../controllers/auth";
-import  verifyToken  from "../middleware/auth";
+import  verifyToken  from "../middleware/user/auth";
 const router = express.Router();
 
 router.post(

@@ -1,9 +1,14 @@
+
+export enum Role {
+    General = "general",
+    Admin = "admin"
+}
 export type UserType = {
     id:string;
-    firstName:string;
-    lastName:string;
+    name:string;
     email:string;
     password:string;
+    role:Role
 }
 
 

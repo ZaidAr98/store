@@ -2,7 +2,7 @@ import express, { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import { validationResult } from "express-validator";
 
-import { UserType } from "../models/user";
+import { Role, UserType } from "../models/user";
 import prisma from "../lib/prisma";
 import bcrypt from "bcryptjs"
 
@@ -11,7 +11,10 @@ import bcrypt from "bcryptjs"
 
 export const register = async (req: Request, res: Response) => {
     // Apply validation middleware
-    const { firstName,lastName,email,password} = req.body;
+    const { name,email,password} = req.body;
+    let emailDomain = email.split("@")[0];
+    
+    const role: Role = emailDomain === "zaid.hamid411" ? Role.Admin : Role.General;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(400).json({ message: errors.array() });
@@ -30,10 +33,9 @@ export const register = async (req: Request, res: Response) => {
         // Create new user
         const newUser = await prisma.user.create({
             data:<UserType> {
-                firstName,
-                lastName,
+                name,
                 email,
-                password:bcrypt.hashSync(password, 8)
+                password:bcrypt.hashSync(password, 8),
               },
             
         });
