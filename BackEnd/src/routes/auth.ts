@@ -1,8 +1,8 @@
 import express from "express";
 import { Login, logout} from "../controllers/auth";
 import { check } from "express-validator";
-import { validateUser } from "../controllers/auth";
-import  verifyToken  from "../middleware/user/auth";
+
+
 const router = express.Router();
 
 router.post(
@@ -15,7 +15,7 @@ router.post(
   ],
 Login
 );
-router.get("/validate-token", verifyToken, validateUser);
+
 router.post("/logout", logout);
 
 export default router;

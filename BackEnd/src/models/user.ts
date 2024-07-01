@@ -8,7 +8,20 @@ export type UserType = {
     name:string;
     email:string;
     password:string;
-    role:Role
+    role:Role;
+   
 }
 
 
+export type RefreshTokenType = {
+    id: string;
+    userId: string;
+    refreshToken: string;
+    accessToken: string;
+}
+
+export type AuthType ={
+    email:string;
+    password:string;
+    tokens: RefreshTokenType[];
+}

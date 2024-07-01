@@ -13,11 +13,23 @@ enum Role {
 }
 
 
-model user {
+model User {
   id        String  @id @default(uuid())
   name      String?
   email     String  @unique
   password  String  @db.VarChar(255)
   role      Role   @default(general)
+  tokens    RefreshToken[]
   @@map("user")
 }
+
+
+model RefreshToken{
+  id           String   @id @default(uuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id])
+  refreshToken String
+  accessToken  String
+  @@map("refresh_token")
+}
+
