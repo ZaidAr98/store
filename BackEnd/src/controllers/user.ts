@@ -50,7 +50,6 @@ export const register = async (req: Request, res: Response) => {
       .send({
         success: false,
         message: "User not added",
-        error: error.message,
       });
   }
 };
