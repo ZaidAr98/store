@@ -20,7 +20,20 @@ model User {
   password  String  @db.VarChar(255)
   role      Role   @default(general)
   tokens    RefreshToken[]
+  createdAt   DateTime @default(now())
+
   @@map("user")
+}
+
+model Product {
+  id            String     @id @default(uuid())
+  name          String
+  description   String
+  price         Float
+  imageUrl      String
+  stock         Int
+  createdAt     DateTime   @default(now())
+
 }
 
 
@@ -30,6 +43,7 @@ model RefreshToken{
   user         User     @relation(fields: [userId], references: [id])
   refreshToken String
   accessToken  String
+
   @@map("refresh_token")
 }
 

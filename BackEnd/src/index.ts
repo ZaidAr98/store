@@ -4,7 +4,8 @@ import "dotenv/config"
 const app = express()
 import  userRoute from './routes/user'
 import authRoute from "./routes/auth"
-import cors from "cors";
+import addProductRoute from "./routes/products"
+import cors from "cors"
 const port = process.env.PORT || 8080
 
 app.use(cookieParser())
@@ -20,6 +21,7 @@ app.use(
 app.use("/api/user",userRoute)
 
 app.use("/api/auth", authRoute);
+app.use('/api/products', addProductRoute);
 app.listen(port,()=>{
     console.log(`server running on localhost ${port}`);
     

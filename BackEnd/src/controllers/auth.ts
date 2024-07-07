@@ -43,6 +43,10 @@ export const Login = async (req: Request, res: Response) => {
       refreshToken,
       accessToken,
       accessTokenUpdatedAt: new Date().toLocaleString(),
+      user:{
+        name:user.name,
+        role:user.role
+      }
     });
   } catch (err: any) {
     logger.error(`Error occurred while signing in user: ${err.message}`);
