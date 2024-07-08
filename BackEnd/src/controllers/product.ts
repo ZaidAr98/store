@@ -27,3 +27,17 @@ export const addProduct  = async (req: Request, res: Response) => {
     }
   };
   
+
+  export const getProducts = async(req:Request,res:Response)=>{
+    try {
+      const products = await prisma.product.findMany({
+        orderBy:{
+          createdAt:"desc"
+        }
+      })
+      res.json(products)
+    } catch (error) {
+      console.error("error", error);
+      res.status(500).json({ message: "Error fetching products" });
+    }
+  }
