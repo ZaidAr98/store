@@ -14,3 +14,141 @@
 2024-07-07 23:12:06 info: User attempting to sign in
 2024-07-07 23:13:46 info: User attempting to sign in
 2024-07-07 23:20:32 info: User attempting to sign in
+2024-07-08 00:47:53 info: User attempting to sign in
+2024-07-08 00:47:53 error: Error occurred while signing in user: 
+Invalid `prisma.refreshToken.create()` invocation in
+/home/zaid/Documents/store/BackEnd/src/controllers/auth.ts:34:55
+
+  31 const accessToken = jwt.sign({ id: user.id,role:user.role }, process.env.JWT_SECRET as string, { expiresIn: "1d" });
+  32 const refreshToken = jwt.sign({ id: user.id}, process.env.JWT_SECRET as string, { expiresIn: "7d" });
+  33 
+→ 34 const newRefreshToken = await prisma.refreshToken.create(
+The provided value for the column is too long for the column's type. Column: accessToken
+2024-07-08 00:47:55 info: User attempting to sign in
+2024-07-08 00:47:55 error: Error occurred while signing in user: 
+Invalid `prisma.refreshToken.create()` invocation in
+/home/zaid/Documents/store/BackEnd/src/controllers/auth.ts:34:55
+
+  31 const accessToken = jwt.sign({ id: user.id,role:user.role }, process.env.JWT_SECRET as string, { expiresIn: "1d" });
+  32 const refreshToken = jwt.sign({ id: user.id}, process.env.JWT_SECRET as string, { expiresIn: "7d" });
+  33 
+→ 34 const newRefreshToken = await prisma.refreshToken.create(
+The provided value for the column is too long for the column's type. Column: accessToken
+2024-07-08 00:49:14 info: User attempting to sign in
+2024-07-08 00:55:53 info: User attempting to sign in
+2024-07-08 00:58:57 info: User attempting to sign in
+2024-07-08 11:51:41 info: User attempting to sign in
+2024-07-08 11:51:42 error: Error occurred while signing in user: 
+Invalid `prisma.refreshToken.create()` invocation in
+/home/zaid/Documents/store/BackEnd/src/controllers/auth.ts:34:55
+
+  31 const accessToken = jwt.sign({ userId: user.id }, process.env.JWT_SECRET as string, { expiresIn: "1d" });
+  32 const refreshToken = jwt.sign({ userId: user.id }, process.env.JWT_SECRET as string, { expiresIn: "7d" });
+  33 
+→ 34 const newRefreshToken = await prisma.refreshToken.create(
+The provided value for the column is too long for the column's type. Column: refreshToken
+2024-07-08 11:51:47 info: User attempting to sign in
+2024-07-08 11:51:47 error: Error occurred while signing in user: 
+Invalid `prisma.refreshToken.create()` invocation in
+/home/zaid/Documents/store/BackEnd/src/controllers/auth.ts:34:55
+
+  31 const accessToken = jwt.sign({ userId: user.id }, process.env.JWT_SECRET as string, { expiresIn: "1d" });
+  32 const refreshToken = jwt.sign({ userId: user.id }, process.env.JWT_SECRET as string, { expiresIn: "7d" });
+  33 
+→ 34 const newRefreshToken = await prisma.refreshToken.create(
+The provided value for the column is too long for the column's type. Column: refreshToken
+2024-07-08 11:51:55 info: User attempting to sign in
+2024-07-08 11:51:55 error: Error occurred while signing in user: 
+Invalid `prisma.refreshToken.create()` invocation in
+/home/zaid/Documents/store/BackEnd/src/controllers/auth.ts:34:55
+
+  31 const accessToken = jwt.sign({ userId: user.id }, process.env.JWT_SECRET as string, { expiresIn: "1d" });
+  32 const refreshToken = jwt.sign({ userId: user.id }, process.env.JWT_SECRET as string, { expiresIn: "7d" });
+  33 
+→ 34 const newRefreshToken = await prisma.refreshToken.create(
+The provided value for the column is too long for the column's type. Column: refreshToken
+2024-07-08 11:52:01 info: User attempting to sign in
+2024-07-08 11:52:01 error: Error occurred while signing in user: 
+Invalid `prisma.refreshToken.create()` invocation in
+/home/zaid/Documents/store/BackEnd/src/controllers/auth.ts:34:55
+
+  31 const accessToken = jwt.sign({ userId: user.id }, process.env.JWT_SECRET as string, { expiresIn: "1d" });
+  32 const refreshToken = jwt.sign({ userId: user.id }, process.env.JWT_SECRET as string, { expiresIn: "7d" });
+  33 
+→ 34 const newRefreshToken = await prisma.refreshToken.create(
+The provided value for the column is too long for the column's type. Column: refreshToken
+2024-07-08 11:56:25 info: User attempting to sign in
+2024-07-08 11:56:25 error: Error occurred while signing in user: 
+Invalid `prisma.refreshToken.create()` invocation in
+/home/zaid/Documents/store/BackEnd/src/controllers/auth.ts:34:55
+
+  31 const accessToken = jwt.sign({ userId: user.id }, process.env.JWT_SECRET as string, { expiresIn: "1d" });
+  32 const refreshToken = jwt.sign({ userId: user.id }, process.env.JWT_SECRET as string, { expiresIn: "7d" });
+  33 
+→ 34 const newRefreshToken = await prisma.refreshToken.create(
+The provided value for the column is too long for the column's type. Column: refreshToken
+2024-07-08 11:56:29 info: User attempting to sign in
+2024-07-08 11:56:29 error: Error occurred while signing in user: 
+Invalid `prisma.refreshToken.create()` invocation in
+/home/zaid/Documents/store/BackEnd/src/controllers/auth.ts:34:55
+
+  31 const accessToken = jwt.sign({ userId: user.id }, process.env.JWT_SECRET as string, { expiresIn: "1d" });
+  32 const refreshToken = jwt.sign({ userId: user.id }, process.env.JWT_SECRET as string, { expiresIn: "7d" });
+  33 
+→ 34 const newRefreshToken = await prisma.refreshToken.create(
+The provided value for the column is too long for the column's type. Column: refreshToken
+2024-07-08 12:04:24 info: User attempting to sign in
+2024-07-08 12:04:24 error: Error occurred while signing in user: 
+Invalid `prisma.refreshToken.create()` invocation in
+/home/zaid/Documents/store/BackEnd/src/controllers/auth.ts:34:55
+
+  31 const accessToken = jwt.sign({ userId: user.id }, process.env.JWT_SECRET as string, { expiresIn: "1d" });
+  32 const refreshToken = jwt.sign({ userId: user.id }, process.env.JWT_SECRET as string, { expiresIn: "7d" });
+  33 
+→ 34 const newRefreshToken = await prisma.refreshToken.create({
+       data: {
+         refreshToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI4Mjc1MmY2OS1mY2EzLTQwZmMtYjVjYS0wY2FmYzhhNTc0NjgiLCJpYXQiOjE3MjA0MjU4NjQsImV4cCI6MTcyMTAzMDY2NH0.BqnNa_td0RvpvTW3pai0qUcCi4u49FrhjvDXjB-Yb44",
+         accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI4Mjc1MmY2OS1mY2EzLTQwZmMtYjVjYS0wY2FmYzhhNTc0NjgiLCJpYXQiOjE3MjA0MjU4NjQsImV4cCI6MTcyMDUxMjI2NH0.7C0UpqzHUeMzLVePaS_CzWaef5pBiNE-j5oUumz5wmI",
+     +   user: {
+     +     create: UserCreateWithoutTokensInput | UserUncheckedCreateWithoutTokensInput,
+     +     connectOrCreate: UserCreateOrConnectWithoutTokensInput,
+     +     connect: UserWhereUniqueInput
+     +   }
+       }
+     })
+
+Argument `user` is missing.
+2024-07-08 12:06:29 info: User attempting to sign in
+2024-07-08 12:06:29 error: Error occurred while signing in user: 
+Invalid `prisma.refreshToken.create()` invocation in
+/home/zaid/Documents/store/BackEnd/src/controllers/auth.ts:34:55
+
+  31 const accessToken = jwt.sign({ userId: user.id }, process.env.JWT_SECRET as string, { expiresIn: "1d" });
+  32 const refreshToken = jwt.sign({ userId: user.id }, process.env.JWT_SECRET as string, { expiresIn: "7d" });
+  33 
+→ 34 const newRefreshToken = await prisma.refreshToken.create({
+       data: {
+         refreshToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxODg2MzMxMi00ZTllLTQzZmYtODhiOS1hOWQxZThlMjMzYTciLCJpYXQiOjE3MjA0MjU5ODksImV4cCI6MTcyMTAzMDc4OX0.yAwPEjisoq8JVhWDWrKCCzbY6vj46ZCbVDu64N27l2g",
+         accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxODg2MzMxMi00ZTllLTQzZmYtODhiOS1hOWQxZThlMjMzYTciLCJpYXQiOjE3MjA0MjU5ODksImV4cCI6MTcyMDUxMjM4OX0.jCBSzqGWOM0w4kHEE9SYBr2vYx9ZNHkWaMs-XNaymFE",
+     +   user: {
+     +     create: UserCreateWithoutTokensInput | UserUncheckedCreateWithoutTokensInput,
+     +     connectOrCreate: UserCreateOrConnectWithoutTokensInput,
+     +     connect: UserWhereUniqueInput
+     +   }
+       }
+     })
+
+Argument `user` is missing.
+2024-07-08 12:06:56 info: User attempting to sign in
+2024-07-08 12:06:56 error: Error occurred while signing in user: 
+Invalid `prisma.refreshToken.create()` invocation in
+/home/zaid/Documents/store/BackEnd/src/controllers/auth.ts:34:55
+
+  31 const accessToken = jwt.sign({ userId: user.id }, process.env.JWT_SECRET as string, { expiresIn: "1d" });
+  32 const refreshToken = jwt.sign({ userId: user.id }, process.env.JWT_SECRET as string, { expiresIn: "7d" });
+  33 
+→ 34 const newRefreshToken = await prisma.refreshToken.create(
+The provided value for the column is too long for the column's type. Column: refreshToken
+2024-07-08 12:09:39 info: User attempting to sign in
+2024-07-08 12:09:54 info: User attempting to sign in
+2024-07-08 12:09:58 info: User attempting to sign in

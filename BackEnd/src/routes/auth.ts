@@ -1,6 +1,7 @@
 import express from "express";
-import { Login, logout} from "../controllers/auth";
+import { Login, logout, validateUser} from "../controllers/auth";
 import { check } from "express-validator";
+import { authenticateJWT } from "../middleware/auth/authintecateToken";
 
 
 const router = express.Router();
@@ -15,7 +16,7 @@ router.post(
   ],
 Login
 );
-
+router.get("/validate-token",authenticateJWT,validateUser)
 router.post("/logout", logout);
 
 export default router;

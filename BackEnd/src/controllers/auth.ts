@@ -56,7 +56,7 @@ export const Login = async (req: Request, res: Response) => {
 
 
 export const validateUser =(req:Request,res:Response) =>{
-  res.status(200).send({id:req.body.id})
+  res.status(200).send({id:req.userId})
 }
 
 
