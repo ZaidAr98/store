@@ -13,7 +13,7 @@ declare global {
     }
   }
 
-export const authenticateJWT = async (req: Request, res: Response, next: NextFunction) => {
+export const adminRole = async (req: Request, res: Response, next: NextFunction) => {
   const token = req.cookies["auth_token"];
 
   if (!token) {
@@ -22,7 +22,8 @@ export const authenticateJWT = async (req: Request, res: Response, next: NextFun
 
   try {
     const decoded: any = jwt.verify(token, process.env.JWT_SECRET as string);
-    req.userId = (decoded as JwtPayload).id;
+    req.userRole = (decoded as JwtPayload).role;
+
     next();
   } catch (error) {
     return res.status(401).json({ message: "Unauthorized" });

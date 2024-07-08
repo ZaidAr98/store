@@ -28,26 +28,16 @@ export const Login = async (req: Request, res: Response) => {
       return res.status(400).json({ message: "Invalid credentials" });
     }
 
-    const accessToken = jwt.sign({ id: user.id }, process.env.JWT_SECRET as string, { expiresIn: "1d" });
+    const accessToken = jwt.sign({ id: user.id,role:user.role}, process.env.JWT_SECRET as string, { expiresIn: "1d" });
     const refreshToken = jwt.sign({ id: user.id }, process.env.JWT_SECRET as string, { expiresIn: "7d" });
 
-    const newRefreshToken = await prisma.refreshToken.create({
-      data:<RefreshToken> {
-        userId: user.id,
-        refreshToken: refreshToken,
-        accessToken: accessToken,
-      },
+   
+   
+    res.cookie("auth_token", accessToken, {
+      httpOnly: true,
+      maxAge: 86400000,
     });
-
-    return res.status(200).json({
-      refreshToken,
-      accessToken,
-      accessTokenUpdatedAt: new Date().toLocaleString(),
-      user:{
-        name:user.name,
-        role:user.role
-      }
-    });
+    res.status(200).json({ userId: user.id });
   } catch (err: any) {
     logger.error(`Error occurred while signing in user: ${err.message}`);
     return res.status(500).json({ message: "Something went wrong" });
@@ -61,29 +51,12 @@ export const validateUser =(req:Request,res:Response) =>{
 
 
 export const logout = async (req: Request, res: Response) => {
-  const { refreshToken } = req.body;
-  const accessToken = req.headers.authorization?.split(" ")[1];
+ 
 
   try {
-    // Find the associated refresh token for the access token
-    const tokenPair = await prisma.refreshToken.findFirst({
-      where: {
-        accessToken: accessToken,
-        refreshToken: refreshToken,
-      },
+    res.cookie("auth_token", "", {
+      expires: new Date(0),
     });
-
-    if (!tokenPair) {
-      return res.status(401).json({ message: "Invalid refresh token" });
-    }
-
-    // Remove the access and refresh tokens from the database
-    await prisma.refreshToken.delete({
-      where: {
-        id: tokenPair.id,
-      },
-    });
-
     return res.status(200).json({
       success: true,
       message: "Logout successful",
