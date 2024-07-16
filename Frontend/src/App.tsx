@@ -3,6 +3,7 @@ import "./App.css"
 import Register from "./app/Pages/Register"
 import Home from "./app/Pages/Home"
 import Login from "./app/Pages/Login"
+import AddProduct from "./app/Pages/AddProduct"
 
 
 const App = () => {
@@ -32,6 +33,12 @@ const App = () => {
               <Login />
           
           }
+        />
+        <Route 
+        path="/addProduct"
+        element={
+          <AddProduct/>
+        }
         />
         </Routes>
         </BrowserRouter>

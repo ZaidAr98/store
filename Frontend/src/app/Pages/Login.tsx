@@ -37,7 +37,7 @@ const Login = () => {
   useEffect(() => {
     if (isLoginSuccess) {
       toast.success("User SignUp Successfully");
-      dispatch(setUser({refreshToken:data.refreshToken,accessToken:data.refreshToken,accessTokenUpdatedAt:data.accessTokenUpdatedAt}))
+      dispatch(setUser({userId:data.userId}))
       navigate("/");
     }
   }, [isLoginSuccess]);
@@ -97,9 +97,9 @@ const Login = () => {
               </button>
             </div>
             <div className="text-center text-white mt-2">
-              Don&apos;t have an account?&nbsp;
-              <a href="/pages/signup" className="text-pink-600 hover:text-pink-500">
-                Signup
+              Don&apos;t have an account?&nbsp; 
+              <a href="/register" className="text-pink-600 hover:text-pink-500">
+                 Register
               </a>
             </div>
           </form>

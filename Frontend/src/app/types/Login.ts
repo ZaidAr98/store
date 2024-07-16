@@ -1,7 +1,5 @@
 export type LoginResponse = {
-    refreshToken: string | null,
-    accessToken: string | null,
-    accessTokenUpdatedAt : string | null
+   userId : string | null
   }
 
   export type LoginFormData = {

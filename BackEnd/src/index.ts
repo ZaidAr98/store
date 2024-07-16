@@ -5,8 +5,16 @@ const app = express()
 import  userRoute from './routes/user'
 import authRoute from "./routes/auth"
 import addProductRoute from "./routes/products"
+import {v2 as cloudinary} from "cloudinary"
 import cors from "cors"
-const port = process.env.PORT || 8080
+const port = process.env.PORT 
+
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 app.use(cookieParser())
 app.use(express.json())

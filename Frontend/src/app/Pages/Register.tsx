@@ -53,13 +53,13 @@ const Register = () => {
           </h2>
           <form onSubmit={onSubmit} className="mt-8 space-y-6">
           <div>
-                <label htmlFor="name" className="block text-sm font-medium text-green-500">
+                <label htmlFor="name" className="block mb-2 font-medium text-gray-900 dark:text-white text-left text-lg">
                   Name
                 </label>
                 <input
                   id="name"
                   type="text"
-                  className={`appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm ${errors.last_name ? 'border-red-500' : ''}`}
+                  className='border border-lime-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  required'
                   placeholder="name"
                   {...register("name")}
                 />
@@ -67,26 +67,26 @@ const Register = () => {
               </div>
             <div className="rounded-md shadow-sm -space-y-px">
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-green-500">
+                <label htmlFor="email" className="block mb-2 font-medium text-gray-900 dark:text-white text-left text-lg">
                   Email
                 </label>
                 <input
                   id="email"
                   type="email"
-                  className={`appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm ${errors.email ? 'border-red-500' : ''}`}
+                  className="border border-lime-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 required"
                   placeholder="Email"
                   {...register("email")}
                 />
                 {errors.email && <span className="text-red-500 text-sm">{errors.email.message}</span>}
               </div>
               <div>
-                <label htmlFor="password" className="block text-sm font-medium text-green-500">
+                <label htmlFor="password" className="block mb-2 font-medium text-gray-900 dark:text-white text-left text-lg">
                   Password
                 </label>
                 <input
                   id="password"
                   type="password"
-                  className={`appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm ${errors.password ? 'border-red-500' : ''}`}
+                  className="border border-lime-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 required"
                   placeholder="Password"
                   {...register("password")}
                 />
@@ -104,9 +104,9 @@ const Register = () => {
               </button>
             </div>
             <div className="text-center text-white mt-2">
-              Don&apos;t have an account?&nbsp;
-              <a href="/pages/login" className="text-pink-600 hover:text-pink-500">
-                Login
+             Do you have account already?
+              <a href="/login" className="text-pink-600 hover:text-pink-500">
+              Login
               </a>
             </div>
           </form>

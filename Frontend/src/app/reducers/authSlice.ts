@@ -5,9 +5,7 @@ import { RootState } from "../store";
 
 
 const initialState : LoginResponse ={
-    refreshToken: null,
-    accessToken: null,
-    accessTokenUpdatedAt : null
+    userId:null
 }
 
 
@@ -20,14 +18,12 @@ export const authSlice = createSlice ({
         localStorage.setItem(
             "userInfo",
             JSON.stringify({
-                refreshToken:action.payload.refreshToken,
-                accessToken : action.payload.accessToken,
-                accessTokenUpdatedAt : action.payload.accessTokenUpdatedAt
+
+                userId : action.payload.userId
             })
         )
-        state.refreshToken = action.payload.refreshToken
-        state.accessToken  = action.payload.accessToken
-        state.accessTokenUpdatedAt = action.payload.accessTokenUpdatedAt
+      
+     state.userId = action.payload.userId
 
         }
     }
