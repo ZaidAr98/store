@@ -30,7 +30,7 @@ model Product {
   name          String
   description   String
   price         Float
-  imageUrl      String
+  imageUrls     String
   stock         Int
   createdAt     DateTime   @default(now())
 

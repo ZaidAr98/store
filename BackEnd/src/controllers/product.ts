@@ -1,10 +1,11 @@
 import prisma from "../lib/prisma";
 import { Request, Response } from 'express';
 import { ProductData } from "../models/product";
-import cloudinary from "cloudinary"
+import {v2} from 'cloudinary'
+import { promises } from "dns";
 
 export const addProduct  = async (req: Request, res: Response) => {
-  
+    console.log(req.body)
   if (req.userRole !== 'admin') {
     return res.status(403).json({ message: "Forbidden: You do not have the necessary permissions" });
   }
@@ -13,16 +14,18 @@ export const addProduct  = async (req: Request, res: Response) => {
     try {
       const {name,description,price,stock} = req.body;
       const imageFiles = req.files as Express.Multer.File[];
-      const  imageUrl = await uploadImages(imageFiles)
-    
+      const  imageUrl = await uploadImages(imageFiles[0])
+      if (!imageFiles || imageFiles.length === 0) {
+        return res.status(400).json({ message: 'No files uploaded' });
+      }
       
       const newProduct = await prisma.product.create({
         data: {
           name,
           description,
-          price,
-          imageUrl,
-          stock,
+          price : parseFloat(price) ,
+          imageUrl: imageUrl, 
+          stock: parseInt(stock),
         },
       });
       
@@ -49,39 +52,39 @@ export const addProduct  = async (req: Request, res: Response) => {
   }
 
 
-  export const updateProduct = async (req: Request, res: Response) => {
-    if (req.userRole !== 'admin') {
-      return res.status(403).json({ message: "Forbidden: You do not have the necessary permissions" });
-    }
-    const { productId } = req.params;
-    const { name, description, price,  imageUrl, stock } = req.body;
+  // export const updateProduct = async (req: Request, res: Response) => {
+  //   if (req.userRole !== 'admin') {
+  //     return res.status(403).json({ message: "Forbidden: You do not have the necessary permissions" });
+  //   }
+  //   const { productId } = req.params;
+  //   const { name, description, price,  imageUrl, stock } = req.body;
   
-    try {
-      const product = await prisma.product.findUnique({
-        where: { id: productId },
-      });
+  //   try {
+  //     const product = await prisma.product.findUnique({
+  //       where: { id: productId },
+  //     });
   
-      if (!product) {
-        return res.status(404).json({ message: "The product hasn't been found" });
-      }
+  //     if (!product) {
+  //       return res.status(404).json({ message: "The product hasn't been found" });
+  //     }
   
-      const updatedProduct = await prisma.product.update({
-        where: { id: productId },
-        data: {
-          name,
-          description,
-          price,
-          imageUrl,
-          stock,
-        } as ProductData,
-      });
+  //     const updatedProduct = await prisma.product.update({
+  //       where: { id: productId },
+  //       data: {
+  //         name,
+  //         description,
+  //         price,
+  //         imageUrl,
+  //         stock,
+  //       } as ProductData,
+  //     });
   
-      res.status(200).json(updatedProduct);
-    } catch (error) {
-      console.error("Error updating product:", error);
-      res.status(500).json({ message: "Error updating product" });
-    }
-  };
+  //     res.status(200).json(updatedProduct);
+  //   } catch (error) {
+  //     console.error("Error updating product:", error);
+  //     res.status(500).json({ message: "Error updating product" });
+  //   }
+  // };
 
 
 
@@ -113,10 +116,17 @@ export const addProduct  = async (req: Request, res: Response) => {
   };
 
 
-  export const uploadImages = async (imageFiles: Express.Multer.File[]) => {
-    const uploadPromises = imageFiles.map(async (image) => {
-      const b64 = Buffer.from(image.buffer).toString("base64");
-      let dataURI = "data:" + image.mimetype + ";base64," + b64;
-      const res = await cloudinary.v2.uploader.upload(dataURI);
-      return res.url;
-    })}
+  export const uploadImages = async (file: Express.Multer.File) : Promise<string> => {
+    
+    try {
+      const {buffer, mimetype} = file; 
+      const b64 = buffer.toString('base64');
+      const res = await v2.uploader.upload(`data:${mimetype};base64,${b64}`, {folder: "any", resource_type: 'auto',format: mimetype.split('/')[1]});
+      return res.secure_url;
+    }catch(err){
+      console.log(err)
+      throw new Error("server error")
+    }
+
+
+  };

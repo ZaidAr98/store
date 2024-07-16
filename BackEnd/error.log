@@ -138,3 +138,14 @@ Invalid `prisma.refreshToken.create()` invocation in
   33 
 → 34 const newRefreshToken = await prisma.refreshToken.create(
 The provided value for the column is too long for the column's type. Column: accessToken
+2024-07-16 15:56:15 error: Error occurred while signing in user: 
+Invalid `prisma.user.findFirst()` invocation in
+/home/zaid/Documents/store/store/BackEnd/src/controllers/auth.ts:19:36
+
+  16 logger.info("User attempting to sign in");
+  17 
+  18 try {
+→ 19   const user = await prisma.user.findFirst(
+Can't reach database server at `127.0.0.1:3306`
+
+Please make sure your database server is running at `127.0.0.1:3306`.

@@ -3,7 +3,7 @@ export interface ProductData {
     name: string;
     description: string;
     price: number;
-    imageUrl: string;
+    imageUrl: string[];
     stock: number;
     createdAt: Date
 
