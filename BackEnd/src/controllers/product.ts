@@ -4,6 +4,9 @@ import { ProductData } from "../models/product";
 import {v2} from 'cloudinary'
 import { promises } from "dns";
 
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const addProduct  = async (req: Request, res: Response) => {
     console.log(req.body)
   if (req.userRole !== 'admin') {
@@ -15,6 +18,8 @@ export const addProduct  = async (req: Request, res: Response) => {
       const {name,description,price,stock} = req.body;
       const imageFiles = req.files as Express.Multer.File[];
       const  imageUrl = await uploadImages(imageFiles[0])
+      const updatedAt = new Date()
+      const createdAt  = new Date()
       if (!imageFiles || imageFiles.length === 0) {
         return res.status(400).json({ message: 'No files uploaded' });
       }
@@ -24,8 +29,10 @@ export const addProduct  = async (req: Request, res: Response) => {
           name,
           description,
           price : parseFloat(price) ,
-          imageUrl: imageUrl, 
+          imageUrls: imageUrl, 
           stock: parseInt(stock),
+          updatedAt:updatedAt,
+          createdAt:createdAt
         },
       });
       
@@ -35,7 +42,7 @@ export const addProduct  = async (req: Request, res: Response) => {
       res.status(500).json({ error: 'Internal server error' });
     }
   };
-  
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   export const getProducts = async(req:Request,res:Response)=>{
     try {
@@ -51,42 +58,46 @@ export const addProduct  = async (req: Request, res: Response) => {
     }
   }
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  // export const updateProduct = async (req: Request, res: Response) => {
-  //   if (req.userRole !== 'admin') {
-  //     return res.status(403).json({ message: "Forbidden: You do not have the necessary permissions" });
-  //   }
-  //   const { productId } = req.params;
-  //   const { name, description, price,  imageUrl, stock } = req.body;
+  export const updateProduct = async (req: Request, res: Response) => {
+    if (req.userRole !== 'admin') {
+      return res.status(403).json({ message: "Forbidden: You do not have the necessary permissions" });
+    }
+    const { productId } = req.params;
+    const { name, description, price, stock } = req.body;
+    const imageFiles = req.files as Express.Multer.File[];
+    const  imageUrl = await uploadImages(imageFiles[0])
+    const updatedAt =   new Date()
+    try {
+      const product = await prisma.product.findUnique({
+        where: { id: productId },
+      });
   
-  //   try {
-  //     const product = await prisma.product.findUnique({
-  //       where: { id: productId },
-  //     });
-  
-  //     if (!product) {
-  //       return res.status(404).json({ message: "The product hasn't been found" });
-  //     }
-  
-  //     const updatedProduct = await prisma.product.update({
-  //       where: { id: productId },
-  //       data: {
-  //         name,
-  //         description,
-  //         price,
-  //         imageUrl,
-  //         stock,
-  //       } as ProductData,
-  //     });
-  
-  //     res.status(200).json(updatedProduct);
-  //   } catch (error) {
-  //     console.error("Error updating product:", error);
-  //     res.status(500).json({ message: "Error updating product" });
-  //   }
-  // };
+      if (!product) {
+        return res.status(404).json({ message: "The product hasn't been found" });
+      }
+      
+      const updatedProduct = await prisma.product.update({
+        where: { id: productId },
+        data: {
+          name,
+          description,
+          price : parseFloat(price) ,
+          imageUrls: imageUrl || product.imageUrls, 
+          stock: parseInt(stock),
+          updatedAt:updatedAt
+        },
+      });
+     
+      res.status(200).json(updatedProduct);
+    } catch (error) {
+      console.error("Error updating product:", error);
+      res.status(500).json({ message: "Error updating product" });
+    }
+  };
 
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   export const deleteProduct = async (req: Request, res: Response) => {
     if (req.userRole !== 'admin') {
@@ -110,11 +121,12 @@ export const addProduct  = async (req: Request, res: Response) => {
   
       res.status(200).json({message:"the product is deleted successfully"});
     } catch (error) {
-      console.error("Error deleting  product:", error);
-      res.status(500).json({ message: "Error deleting product" });
+      console.error('Error in updateProduct:', error);
+      res.status(500).json({ error: 'Internal server error' });
     }
   };
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   export const uploadImages = async (file: Express.Multer.File) : Promise<string> => {
     

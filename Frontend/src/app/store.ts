@@ -45,16 +45,18 @@ import { setupListeners } from "@reduxjs/toolkit/query/react";
 import { registerApi } from "./services/RegisterApi";
 import { loginApi } from "./services/LoginApi";
 import authSlice from "./reducers/authSlice";
+import { productApi } from "./services/productApi";
 
 export const store = configureStore({
   reducer: {
     [loginApi.reducerPath]: loginApi.reducer,
     [registerApi.reducerPath]: registerApi.reducer,
+    [productApi.reducerPath]:productApi.reducer,
     auth:authSlice
   },
 
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(registerApi.middleware,loginApi.middleware),
+    getDefaultMiddleware().concat(registerApi.middleware,loginApi.middleware,productApi.middleware),
   devTools: true,
 });
 

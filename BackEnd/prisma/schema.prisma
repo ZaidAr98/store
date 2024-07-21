@@ -22,6 +22,7 @@ model User {
   tokens    RefreshToken[]
   createdAt   DateTime @default(now())
 
+
   @@map("user")
 }
 
@@ -30,10 +31,10 @@ model Product {
   name          String
   description   String
   price         Float
-  imageUrls     String
+  imageUrls     String     @default("https://asset.cloudinary.com/djfmzphje/494af7883fd6df6e2e8cc928dd3c07bd")
   stock         Int
-  createdAt     DateTime   @default(now())
-
+  createdAt     DateTime   @updatedAt
+  updatedAt     DateTime   @updatedAt
 }
 
 

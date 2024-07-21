@@ -1,5 +1,5 @@
 import express from "express";
-import { addProduct, deleteProduct, getProducts} from "../controllers/product";
+import { addProduct, deleteProduct, getProducts, updateProduct} from "../controllers/product";
 import { adminRole } from "../middleware/product/adminRole";
 import multer from "multer";
 
@@ -16,7 +16,7 @@ router.post(
   "/addProduct",adminRole,upload.array("imagesFiles",1),addProduct
 );
 router.get("/",getProducts)
-// router.put("/:productId",adminRole,updateProduct)
+router.put("/:productId",adminRole,upload.array("imagesFiles",1),updateProduct)
 router.delete("/:productId",adminRole,deleteProduct)
 
 export default router;
