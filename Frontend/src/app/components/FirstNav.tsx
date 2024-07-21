@@ -1,10 +1,5 @@
 import React, { useState } from "react"
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai"
-// import { FaApple } from "react-icons/fa";
-// import { SiAsus } from "react-icons/si";
-// import { SiLenovo } from "react-icons/si";
-// import { SiDell } from "react-icons/si";
-// import CustomIcon from "../../images/Hp"
 import { Apple, Asus, Dell, HP, Lenovo } from "../../images/Images"
 import NavItem from "./FirrstNavItem"
 const FirstNav = () => {
