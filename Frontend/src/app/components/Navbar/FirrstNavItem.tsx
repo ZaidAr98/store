@@ -19,7 +19,8 @@ interface NavItemProps {
         display: 'inline-block',
         width: '40px',
         height: '40px',
-        color: isHovered ? item.col : '#6b7280', // Hover color and default color
+        // Hover color and default color
+        color: isHovered ? item.col : '#6b7280',
         transition: 'color 0.3s ease' // Smooth transition
       }}
       className={`px-10 cursor-pointer text-3xl ${item.padding}`}
