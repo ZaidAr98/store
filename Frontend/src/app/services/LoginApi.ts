@@ -1,8 +1,8 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { BASEURL, LOGIN } from "../api/end-points";
+import { BASEURL, LOGIN, LOGOUT } from "../api/end-points";
 
 // eslint-disable-next-line @typescript-eslint/consistent-type-imports
-import { LoginFormData,LoginResponse } from "../types/Login"
+import { LoginFormData,LoginResponse,LogoutResponse } from "../types/Login"
 
 export const loginApi = createApi({
   reducerPath: "loginApi",
@@ -21,10 +21,16 @@ export const loginApi = createApi({
         })
 
       }),
+    signOut:builder.mutation<LogoutResponse,void>({
+      query: () => ({         
+        url: LOGOUT,
+        method: "POST",
+      })
+    })
     
     }),
 
   })
 
 
-export const { useLoginMutation } = loginApi;
+export const { useLoginMutation,useSignOutMutation } = loginApi;

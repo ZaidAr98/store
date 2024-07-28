@@ -29,7 +29,7 @@ export const Login = async (req: Request, res: Response) => {
     }
 
     const accessToken = jwt.sign({ id: user.id,role:user.role}, process.env.JWT_SECRET as string, { expiresIn: "1d" });
-    const refreshToken = jwt.sign({ id: user.id }, process.env.JWT_SECRET as string, { expiresIn: "7d" });
+    // const refreshToken = jwt.sign({ id: user.id }, process.env.JWT_SECRET as string, { expiresIn: "7d" });
 
    
    
@@ -37,7 +37,7 @@ export const Login = async (req: Request, res: Response) => {
       httpOnly: true,
       maxAge: 86400000,
     });
-    res.status(200).json({ userId: user.id });
+    res.status(200).json({ userId: user.id,role:user.role});
   } catch (err: any) {
     logger.error(`Error occurred while signing in user: ${err.message}`);
     return res.status(500).json({ message: "Something went wrong" });

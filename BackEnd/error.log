@@ -149,3 +149,8 @@ Invalid `prisma.user.findFirst()` invocation in
 Can't reach database server at `127.0.0.1:3306`
 
 Please make sure your database server is running at `127.0.0.1:3306`.
+2024-07-28 18:39:42 error: Invalid credentials
+2024-07-28 18:39:52 error: Invalid credentials
+2024-07-28 18:39:54 error: Invalid credentials
+2024-07-28 18:44:02 error: Invalid credentials
+2024-07-28 18:44:03 error: Invalid credentials

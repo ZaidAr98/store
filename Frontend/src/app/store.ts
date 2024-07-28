@@ -52,6 +52,7 @@ export const store = configureStore({
     [loginApi.reducerPath]: loginApi.reducer,
     [registerApi.reducerPath]: registerApi.reducer,
     [productApi.reducerPath]:productApi.reducer,
+
     auth:authSlice
   },
 
