@@ -1,22 +1,23 @@
-import { useForm } from "react-hook-form";
+import { useForm } from "react-hook-form"
 // eslint-disable-next-line @typescript-eslint/consistent-type-imports
-import { LoginFormData } from "../types/Login";
-import { yupResolver } from "@hookform/resolvers/yup";
-import toast, { Toaster } from "react-hot-toast";
-import LoginSchema from "../schema/LoginSchema";
-import { useLoginMutation } from "../services/LoginApi";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { setUser } from "../reducers/authSlice";
-import { useAppDispatch } from "../hooks";
+import { LoginFormData } from "../types/Login"
+import { yupResolver } from "@hookform/resolvers/yup"
+import toast, { Toaster } from "react-hot-toast"
+import LoginSchema from "../schema/LoginSchema"
+import { useLoginMutation } from "../services/LoginApi"
+import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
+import { setUser } from "../reducers/authSlice"
+import { useAppDispatch } from "../hooks"
 const Login = () => {
-    const navigate = useNavigate();
-    const dispatch = useAppDispatch()
+  const navigate = useNavigate()
+  const dispatch = useAppDispatch()
+  const [showPassword, setShowpassword] = useState<boolean>(false)
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginFormData>({ resolver: yupResolver(LoginSchema) });
+  } = useForm<LoginFormData>({ resolver: yupResolver(LoginSchema) })
 
   const [
     login,
@@ -26,90 +27,100 @@ const Login = () => {
       isError: isLoginError,
       error: loginError,
     },
-  ] = useLoginMutation();
+  ] = useLoginMutation()
 
-  const onSubmit = handleSubmit(async (data) => {
-    login(data);
-   
+  const onSubmit = handleSubmit(async data => {
+    login(data)
+
     console.log("login successful")
-  });
+  })
 
   useEffect(() => {
     if (isLoginSuccess) {
-      toast.success("User SignUp Successfully");
-      dispatch(setUser({
-        userId: data.userId,
-        role: data.role
-      }))
-      navigate("/");
+      toast.success("User SignUp Successfully")
+      dispatch(
+        setUser({
+          userId: data.userId,
+          role: data.role,
+        }),
+      )
+      navigate("/")
     }
-  }, [isLoginSuccess]);
+  }, [isLoginSuccess])
 
   useEffect(() => {
     if (isLoginError) {
-      toast.error((loginError as any).data.message);
+      toast.error((loginError as any).data.message)
     }
-  }, [isLoginError,loginError]);
+  }, [isLoginError, loginError])
 
   return (
     <>
       <Toaster />
       <div className="flex justify-center items-center min-h-screen bg-gray-800">
-        <div className="w-full max-w-xs">
-          <h2 className="mt-6 text-center text-2xl font-extrabold text-pink-600">
+        <div className="w-full p-20 max-w-md bg-white rounded-md">
+          <h2 className="mt-6 text-center text-2xl font-extrabold text-sky-900">
             Create an Account
           </h2>
           <form onSubmit={onSubmit} className="mt-8 space-y-6">
          
-            <div className="rounded-md shadow-sm -space-y-px">
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-green-500">
-                  Email
-                </label>
+              <div className="pb-5">
                 <input
                   id="email"
                   type="email"
-                  className={`appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm ${errors.email ? 'border-red-500' : ''}`}
+                  className={`appearance-none rounded-none relative  block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm ${errors.email ? "border-red-500" : ""}`}
                   placeholder="Email"
                   {...register("email")}
                 />
-                {errors.email && <span className="text-red-500 text-sm">{errors.email.message}</span>}
+                {errors.email && (
+                  <span className="text-red-500 text-sm">
+                    {errors.email.message}
+                  </span>
+                )}
               </div>
               <div>
-                <label htmlFor="password" className="block text-sm font-medium text-green-500">
-                  Password
-                </label>
                 <input
                   id="password"
-                  type="password"
-                  className={`appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm ${errors.password ? 'border-red-500' : ''}`}
+                  type={showPassword ? "text" : "password"}
+                  className={`appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm ${errors.password ? "border-red-500" : ""}`}
                   placeholder="Password"
                   {...register("password")}
                 />
-                {errors.password && <span className="text-red-500 text-sm">{errors.password.message}</span>}
+                {errors.password && (
+                  <span className="text-red-500 text-sm">
+                    {errors.password.message}
+                  </span>
+                )}
               </div>
-              
-              
-            </div>
-            <div>
+              <div className="flex justify-start pb-5">
+              <label className="text-sm pl-3">
+                <input className="mr-3"
+                  type="checkbox"
+                  defaultChecked={showPassword}
+                  onChange={() => setShowpassword(state => !state)}
+                />
+                Show Password
+              </label>
+              </div>
+            <div className="flex justify-center">
               <button
                 type="submit"
-                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-green-500 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className="group relative w-24  py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-green-500 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
                 Login
               </button>
             </div>
-            <div className="text-center text-white mt-2">
-              Don&apos;t have an account?&nbsp; 
-              <a href="/register" className="text-pink-600 hover:text-pink-500">
-                 Register
+            <div className="text-center  mt-2 text-slate-600">
+              Don&apos;t have an account?&nbsp;
+              <a href="/register" className="text-sky-600 hover:text-sky-900">
+                Register
               </a>
             </div>
           </form>
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login
