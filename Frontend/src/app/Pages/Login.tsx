@@ -59,53 +59,53 @@ const Login = () => {
       <Toaster />
       <div className="flex justify-center items-center min-h-screen bg-gray-800">
         <div className="w-full p-20 max-w-md bg-white rounded-md">
-          <h2 className="mt-6 text-center text-2xl font-extrabold text-sky-900">
-            Create an Account
+          <h2 className="pb-6 text-center text-2xl font-extrabold text-sky-900">
+            Login
           </h2>
-          <form onSubmit={onSubmit} className="mt-8 space-y-6">
-         
-              <div className="pb-5">
-                <input
-                  id="email"
-                  type="email"
-                  className={`appearance-none rounded-none relative  block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm ${errors.email ? "border-red-500" : ""}`}
-                  placeholder="Email"
-                  {...register("email")}
-                />
-                {errors.email && (
-                  <span className="text-red-500 text-sm">
-                    {errors.email.message}
-                  </span>
-                )}
-              </div>
-              <div>
-                <input
-                  id="password"
-                  type={showPassword ? "text" : "password"}
-                  className={`appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm ${errors.password ? "border-red-500" : ""}`}
-                  placeholder="Password"
-                  {...register("password")}
-                />
-                {errors.password && (
-                  <span className="text-red-500 text-sm">
-                    {errors.password.message}
-                  </span>
-                )}
-              </div>
-              <div className="flex justify-start pb-5">
+          <form onSubmit={onSubmit} className="mt-8 ">
+            <div className="pb-8">
+              <input
+                id="email"
+                type="email"
+                className={`appearance-none rounded-none relative  block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-emerald-700 focus:border-emerald-700 focus:z-10 sm:text-sm ${errors.email ? "border-red-500" : ""}`}
+                placeholder="Email"
+                {...register("email")}
+              />
+              {errors.email && (
+                <span className="text-red-500 text-sm">
+                  {errors.email.message}
+                </span>
+              )}
+            </div>
+            <div className="pb-4">
+              <input
+                id="password"
+                type={showPassword ? "text" : "password"}
+                className={`appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-emerald-700 focus:border-emerald-700 focus:z-10 sm:text-sm ${errors.password ? "border-red-500" : ""}`}
+                placeholder="Password"
+                {...register("password")}
+              />
+              {errors.password && (
+                <span className="text-red-500 text-sm">
+                  {errors.password.message}
+                </span>
+              )}
+            </div>
+            <div className="flex justify-start pb-8">
               <label className="text-sm pl-3">
-                <input className="mr-3"
+                <input
+                  className="mr-3"
                   type="checkbox"
                   defaultChecked={showPassword}
                   onChange={() => setShowpassword(state => !state)}
                 />
                 Show Password
               </label>
-              </div>
-            <div className="flex justify-center">
+            </div>
+            <div className="flex justify-center pb-10">
               <button
                 type="submit"
-                className="group relative w-24  py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-green-500 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className="group relative w-24  py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-emerald-500 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
                 Login
               </button>
