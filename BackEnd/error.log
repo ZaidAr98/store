@@ -166,3 +166,7 @@ Authentication failed against database server at `127.0.0.1`, the provided datab
 
 Please make sure to provide valid database credentials for the database server at `127.0.0.1`.
 2024-08-06 02:06:05 error: User not found
+2024-08-06 19:56:59 error: Invalid credentials
+2024-08-06 19:57:01 error: Invalid credentials
+2024-08-06 19:57:01 error: Invalid credentials
+2024-08-06 19:57:14 error: User not found

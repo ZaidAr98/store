@@ -22,7 +22,7 @@ const DesktopFirstNav : React.FC<DesktopNavProps> = ({ navItems, role })=> {
         </div>
         </div>
         <div className="pt-4  justify-center">
-          {role === "admin" ? <p><Link to="/adminPanel">Admin</Link></p> : <p>Hello</p>}
+          {role === "admin" ? <p><Link to="/adminPanel/purchases">Admin</Link></p> : <p>Hello</p>}
         </div>  
     </nav>
   </div>

@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import AddProduct from "../components/AdminPanel/AddProduct";
+import AddProduct from "../components/AdminPanel/AdminForm/AddProduct";
 import AdminLayout from "../components/AdminPanel/AdminLayout";
 import MyPurchase from "../components/AdminPanel/MyPurchase";
 import "../../App.css";

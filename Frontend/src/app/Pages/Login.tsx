@@ -1,23 +1,23 @@
-import { useForm } from "react-hook-form"
-// eslint-disable-next-line @typescript-eslint/consistent-type-imports
-import { LoginFormData } from "../types/Login"
-import { yupResolver } from "@hookform/resolvers/yup"
-import toast, { Toaster } from "react-hot-toast"
-import LoginSchema from "../schema/LoginSchema"
-import { useLoginMutation } from "../services/LoginApi"
-import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
-import { setUser } from "../reducers/authSlice"
-import { useAppDispatch } from "../hooks"
+import { useForm } from "react-hook-form";
+import { LoginFormData } from "../types/Login";
+import { yupResolver } from "@hookform/resolvers/yup";
+import toast, { Toaster } from "react-hot-toast";
+import LoginSchema from "../schema/LoginSchema";
+import { useLoginMutation } from "../services/LoginApi";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { setUser } from "../reducers/authSlice";
+import { useAppDispatch } from "../hooks";
+
 const Login = () => {
-  const navigate = useNavigate()
-  const dispatch = useAppDispatch()
-  const [showPassword, setShowpassword] = useState<boolean>(false)
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const [showPassword, setShowpassword] = useState<boolean>(false);
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginFormData>({ resolver: yupResolver(LoginSchema) })
+  } = useForm<LoginFormData>({ resolver: yupResolver(LoginSchema) });
 
   const [
     login,
@@ -27,37 +27,30 @@ const Login = () => {
       isError: isLoginError,
       error: loginError,
     },
-  ] = useLoginMutation()
+  ] = useLoginMutation();
 
-  const onSubmit = handleSubmit(async data => {
-    login(data)
-
-    console.log("login successful")
-  })
+  const onSubmit = handleSubmit(async (data) => {
+    login(data);
+  });
 
   useEffect(() => {
-    try {
-      if (isLoginSuccess) {
-        toast.success("User SignUp Successfully")
-        dispatch(
-          setUser({
-            userId: data.userId,
-            role: data.role,
-          }),
-        )
-        navigate("/")
-      }
-    } catch (error) {
-      if (isLoginError) {
-        toast.error((loginError as any).data.message)
-      }
-      console.log(error)
-      toast.error("There ")
+    if (isLoginSuccess) {
+      toast.success("User Logged In Successfully");
+      dispatch(
+        setUser({
+          userId: data.userId,
+          role: data.role,
+        })
+      );
+      navigate("/");
     }
-  
-  }, [isLoginSuccess,isLoginError, loginError])
 
- 
+    if (isLoginError) {
+      const errorMessage = (loginError as any).data.message;
+      toast.error(errorMessage || "Something went wrong");
+    }
+  }, [isLoginSuccess, isLoginError, loginError, dispatch, data, navigate]);
+
   return (
     <>
       <Toaster />
@@ -66,12 +59,14 @@ const Login = () => {
           <h2 className="pb-6 text-center text-2xl font-extrabold text-sky-900">
             Login
           </h2>
-          <form onSubmit={onSubmit} className="mt-8 ">
+          <form onSubmit={onSubmit} className="mt-8">
             <div className="pb-8">
               <input
                 id="email"
                 type="email"
-                className={`appearance-none rounded-none relative  block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-emerald-700 focus:border-emerald-700 focus:z-10 sm:text-sm ${errors.email ? "border-red-500" : ""}`}
+                className={`appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-emerald-700 focus:border-emerald-700 focus:z-10 sm:text-sm ${
+                  errors.email ? "border-red-500" : ""
+                }`}
                 placeholder="Email"
                 {...register("email")}
               />
@@ -85,7 +80,9 @@ const Login = () => {
               <input
                 id="password"
                 type={showPassword ? "text" : "password"}
-                className={`appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-emerald-700 focus:border-emerald-700 focus:z-10 sm:text-sm ${errors.password ? "border-red-500" : ""}`}
+                className={`appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-emerald-700 focus:border-emerald-700 focus:z-10 sm:text-sm ${
+                  errors.password ? "border-red-500" : ""
+                }`}
                 placeholder="Password"
                 {...register("password")}
               />
@@ -101,7 +98,7 @@ const Login = () => {
                   className="mr-3"
                   type="checkbox"
                   defaultChecked={showPassword}
-                  onChange={() => setShowpassword(state => !state)}
+                  onChange={() => setShowpassword((state) => !state)}
                 />
                 Show Password
               </label>
@@ -109,13 +106,13 @@ const Login = () => {
             <div className="flex justify-center pb-10">
               <button
                 type="submit"
-                className="group relative w-24  py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-emerald-500 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className="group relative w-24 py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-emerald-500 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
                 Login
               </button>
             </div>
-            <div className="text-center  mt-2 text-slate-600">
-              Don&apos;t have an account?&nbsp;
+            <div className="text-center mt-2 text-slate-600">
+              Don't have an account?&nbsp;
               <a href="/register" className="text-sky-600 hover:text-sky-900">
                 Register
               </a>
@@ -124,7 +121,7 @@ const Login = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

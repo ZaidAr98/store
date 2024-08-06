@@ -246,3 +246,13 @@ Please make sure to provide valid database credentials for the database server a
 2024-08-06 02:11:27 info: User attempting to sign in
 2024-08-06 02:17:37 info: User attempting to sign in
 2024-08-06 14:09:09 info: User attempting to sign in
+2024-08-06 19:42:36 info: User attempting to sign in
+2024-08-06 19:56:59 info: User attempting to sign in
+2024-08-06 19:56:59 error: Invalid credentials
+2024-08-06 19:57:00 info: User attempting to sign in
+2024-08-06 19:57:01 error: Invalid credentials
+2024-08-06 19:57:01 info: User attempting to sign in
+2024-08-06 19:57:01 error: Invalid credentials
+2024-08-06 19:57:14 info: User attempting to sign in
+2024-08-06 19:57:14 error: User not found
+2024-08-06 20:00:41 info: User attempting to sign in
