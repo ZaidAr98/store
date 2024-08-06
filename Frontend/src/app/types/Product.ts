@@ -13,3 +13,9 @@ export type ProductData = {
 
 
 
+export interface NavItem {
+  id:number;
+  title:JSX.Element;
+  col:string;
+  padding:string
+}

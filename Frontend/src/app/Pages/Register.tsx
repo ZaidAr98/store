@@ -47,46 +47,40 @@ const Register = () => {
     <>
       <Toaster />
       <div className="flex justify-center items-center min-h-screen bg-gray-800">
-        <div className="w-full max-w-xs">
-          <h2 className="mt-6 text-center text-2xl font-extrabold text-pink-600">
+        <div className="w-full p-20 max-w-md bg-white rounded-md">
+          <h2 className="pb-6 text-center text-2xl font-extrabold text-sky-900">
             Create an Account
           </h2>
-          <form onSubmit={onSubmit} className="mt-8 space-y-6">
-          <div>
-                <label htmlFor="name" className="block mb-2 font-medium text-gray-900 dark:text-white text-left text-lg">
-                  Name
-                </label>
+          <form onSubmit={onSubmit} className="mt-8 ">
+          <div className="pb-10">
+              
                 <input
                   id="name"
                   type="text"
-                  className='border border-lime-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  required'
+                  className={`appearance-none rounded-none relative  block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-emerald-700 focus:border-emerald-700 focus:z-10 sm:text-sm ${errors.email ? "border-red-500" : ""}`}
                   placeholder="name"
                   {...register("name")}
                 />
                 {errors.name && <span className="text-red-500 text-sm">{errors.name.message}</span>}
               </div>
-            <div className="rounded-md shadow-sm -space-y-px">
-              <div>
-                <label htmlFor="email" className="block mb-2 font-medium text-gray-900 dark:text-white text-left text-lg">
-                  Email
-                </label>
+          
+              <div className="pb-10">
+              
                 <input
                   id="email"
                   type="email"
-                  className="border border-lime-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 required"
+                    className={`appearance-none rounded-none relative  block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-emerald-700 focus:border-emerald-700 focus:z-10 sm:text-sm ${errors.email ? "border-red-500" : ""}`}
                   placeholder="Email"
                   {...register("email")}
                 />
                 {errors.email && <span className="text-red-500 text-sm">{errors.email.message}</span>}
               </div>
-              <div>
-                <label htmlFor="password" className="block mb-2 font-medium text-gray-900 dark:text-white text-left text-lg">
-                  Password
-                </label>
+              <div className="pb-10">
+              
                 <input
                   id="password"
                   type="password"
-                  className="border border-lime-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 required"
+                  className={`appearance-none rounded-none relative  block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-emerald-700 focus:border-emerald-700 focus:z-10 sm:text-sm ${errors.email ? "border-red-500" : ""}`}
                   placeholder="Password"
                   {...register("password")}
                 />
@@ -94,18 +88,18 @@ const Register = () => {
               </div>
               
               
-            </div>
+           
             <div>
               <button
                 type="submit"
-                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-green-500 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className="group relative w-24  py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-emerald-500 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
                 Sign Up
               </button>
             </div>
-            <div className="text-center text-white mt-2">
+             <div className="text-center  mt-10 text-slate-600">
              Do you have account already?
-              <a href="/login" className="text-pink-600 hover:text-pink-500">
+              <a href="/login" className="text-sky-600 hover:text-sky-900">
               Login
               </a>
             </div>

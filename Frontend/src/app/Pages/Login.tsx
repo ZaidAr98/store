@@ -36,24 +36,28 @@ const Login = () => {
   })
 
   useEffect(() => {
-    if (isLoginSuccess) {
-      toast.success("User SignUp Successfully")
-      dispatch(
-        setUser({
-          userId: data.userId,
-          role: data.role,
-        }),
-      )
-      navigate("/")
+    try {
+      if (isLoginSuccess) {
+        toast.success("User SignUp Successfully")
+        dispatch(
+          setUser({
+            userId: data.userId,
+            role: data.role,
+          }),
+        )
+        navigate("/")
+      }
+    } catch (error) {
+      if (isLoginError) {
+        toast.error((loginError as any).data.message)
+      }
+      console.log(error)
+      toast.error("There ")
     }
-  }, [isLoginSuccess])
+  
+  }, [isLoginSuccess,isLoginError, loginError])
 
-  useEffect(() => {
-    if (isLoginError) {
-      toast.error((loginError as any).data.message)
-    }
-  }, [isLoginError, loginError])
-
+ 
   return (
     <>
       <Toaster />

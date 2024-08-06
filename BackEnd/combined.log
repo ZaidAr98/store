@@ -237,3 +237,12 @@ C:\Users\zaidh\Documents\GitHub\store\BackEnd\src\controllers\auth.ts:19:36
 Authentication failed against database server at `127.0.0.1`, the provided database credentials for `root` are not valid.
 
 Please make sure to provide valid database credentials for the database server at `127.0.0.1`.
+2024-08-06 00:58:07 info: User attempting to sign in
+2024-08-06 01:53:48 info: User attempting to sign in
+2024-08-06 01:56:59 info: User attempting to sign in
+2024-08-06 02:06:05 info: User attempting to sign in
+2024-08-06 02:06:05 error: User not found
+2024-08-06 02:07:18 info: User attempting to sign in
+2024-08-06 02:11:27 info: User attempting to sign in
+2024-08-06 02:17:37 info: User attempting to sign in
+2024-08-06 14:09:09 info: User attempting to sign in

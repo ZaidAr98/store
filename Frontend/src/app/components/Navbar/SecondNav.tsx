@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { Cart, User } from "../../../images/Images"
-import NavItem from "./FirrstNavItem"
+import NavItem from "./FirstNavItem"
 import { Link, useNavigate } from "react-router-dom"
 import { useAppSelector } from "../../hooks"
 import { logout } from "../../reducers/authSlice"

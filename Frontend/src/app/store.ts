@@ -1,66 +1,39 @@
-// import type { Action, ThunkAction } from "@reduxjs/toolkit"
-// import { combineSlices, configureStore } from "@reduxjs/toolkit"
-// import { setupListeners } from "@reduxjs/toolkit/query"
-// import { counterSlice } from "../features/counter/counterSlice"
-// import { quotesApiSlice } from "../features/quotes/quotesApiSlice"
+import { configureStore } from '@reduxjs/toolkit';
+import { setupListeners } from '@reduxjs/toolkit/query/react';
+import { registerApi } from './services/RegisterApi';
+import { loginApi } from './services/LoginApi';
+import authSlice from './reducers/authSlice';
+import { productApi } from './services/productApi';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
+import { combineReducers } from '@reduxjs/toolkit';
 
-// // `combineSlices` automatically combines the reducers using
-// // their `reducerPath`s, therefore we no longer need to call `combineReducers`.
-// const rootReducer = combineSlices(counterSlice, quotesApiSlice)
-// // Infer the `RootState` type from the root reducer
-// export type RootState = ReturnType<typeof rootReducer>
+const persistConfig = {
+  key: 'root',
+  storage,
+  whitelist: ['auth'], // List of reducers you want to persist
+};
 
-// // The store setup is wrapped in `makeStore` to allow reuse
-// // when setting up tests that need the same store config
-// export const makeStore = (preloadedState?: Partial<RootState>) => {
-//   const store = configureStore({
-//     reducer: rootReducer,
-//     // Adding the api middleware enables caching, invalidation, polling,
-//     // and other useful features of `rtk-query`.
-//     middleware: getDefaultMiddleware => {
-//       return getDefaultMiddleware().concat(quotesApiSlice.middleware)
-//     },
-//     preloadedState,
-//   })
-//   // configure listeners using the provided defaults
-//   // optional, but required for `refetchOnFocus`/`refetchOnReconnect` behaviors
-//   setupListeners(store.dispatch)
-//   return store
-// }
+const rootReducer = combineReducers({
+  [loginApi.reducerPath]: loginApi.reducer,
+  [registerApi.reducerPath]: registerApi.reducer,
+  [productApi.reducerPath]: productApi.reducer,
+  auth: authSlice,
+});
 
-// export const store = makeStore()
-
-// // Infer the type of `store`
-// export type AppStore = typeof store
-// // Infer the `AppDispatch` type from the store itself
-// export type AppDispatch = AppStore["dispatch"]
-// export type AppThunk<ThunkReturnType = void> = ThunkAction<
-//   ThunkReturnType,
-//   RootState,
-//   unknown,
-//   Action
-// >
-import { configureStore } from "@reduxjs/toolkit";
-import { setupListeners } from "@reduxjs/toolkit/query/react";
-import { registerApi } from "./services/RegisterApi";
-import { loginApi } from "./services/LoginApi";
-import authSlice from "./reducers/authSlice";
-import { productApi } from "./services/productApi";
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
-  reducer: {
-    [loginApi.reducerPath]: loginApi.reducer,
-    [registerApi.reducerPath]: registerApi.reducer,
-    [productApi.reducerPath]:productApi.reducer,
-
-    auth:authSlice
-  },
-
+  reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(registerApi.middleware,loginApi.middleware,productApi.middleware),
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }).concat(registerApi.middleware, loginApi.middleware, productApi.middleware),
   devTools: true,
 });
 
-export type AppDispatch =   typeof store.dispatch
+export const persistor = persistStore(store);
+
+export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
-setupListeners(store.dispatch)
+setupListeners(store.dispatch);

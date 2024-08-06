@@ -165,3 +165,4 @@ C:\Users\zaidh\Documents\GitHub\store\BackEnd\src\controllers\auth.ts:19:36
 Authentication failed against database server at `127.0.0.1`, the provided database credentials for `root` are not valid.
 
 Please make sure to provide valid database credentials for the database server at `127.0.0.1`.
+2024-08-06 02:06:05 error: User not found
